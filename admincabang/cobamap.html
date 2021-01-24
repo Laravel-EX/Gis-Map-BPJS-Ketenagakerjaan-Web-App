@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Marker Hapus</title>
+
+<style>
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+#map-canvas, #map_canvas {
+    height: 100%;
+}
+
+#map-canvas, #map_canvas {
+    height: 650px;
+}
+</style>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDmPbUQ-1Iy-XMEInMvNp1WqteVqmvDdOU"></script>
+
+<script>
+var map;
+var markers = [];
+
+function initialize() {
+    var NY = new google.maps.LatLng(-7.984528, 112.620253);
+    var mapOptions = {
+        zoom: 13,
+        center: NY,
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+    }
+    map = new google.maps.Map(document.getElementById('map-canvas'),mapOptions);
+
+    google.maps.event.addListener(map, 'click', function(event) {
+                addMarker(event.latLng);
+    });
+
+    google.maps.event.addListener(map, 'rightclick', function(event) {
+                marker.setMap(null);
+    });
+}
+
+function addMarker(location) {
+        var marker = new google.maps.Marker({
+        position: location,
+        map: map
+    });
+    google.maps.event.addListener(marker, 'rightclick', function(event) {
+        marker.setMap(null);
+    });
+
+    markers.push(marker);
+}
+
+google.maps.event.addDomListener(window, 'load', initialize);
+
+</script>
+
+</head>
+    <body>
+        <div id="map-canvas" style="width: 800px; height: 600px"></div>
+    </body>
+</html>
